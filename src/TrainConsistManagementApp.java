@@ -1,47 +1,33 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
+
 public class TrainConsistManagementApp {
-    static class Bogie {
-        String name;
-        int capacity;
-
-        Bogie(String name, int capacity) {
-            this.name = name;
-            this.capacity = capacity;
-        }
-
-        public String toString() {
-            return name + " -> " + capacity;
-        }
-    }
 
     public static void main(String[] args) {
 
         System.out.println("=======================================");
-        System.out.println(" UC8 - Filter Passenger Bogies Using Streams ");
+        System.out.println("UC3 - Track Unique Bogie IDs");
         System.out.println("=======================================\n");
 
-        List<Bogie> bogies = new ArrayList<>();
+        // Create HashSet for bogie IDs
+        Set<String> bogieIds = new HashSet<>();
 
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("General", 90));
+        // Adding bogie IDs (including duplicates)
+        bogieIds.add("BG104");
+        bogieIds.add("BG103");
+        bogieIds.add("BG102");
+        bogieIds.add("BG101");
+        bogieIds.add("BG101"); // duplicate
+        bogieIds.add("BG102"); // duplicate
 
-        System.out.println("All Bogies:");
-        for (Bogie b : bogies) {
-            System.out.println(b);
-        }
+        // Display unique bogie IDs
+        System.out.println("Bogie IDs After Insertion:");
+        System.out.println(bogieIds + "\n");
 
-        List<Bogie> filteredBogies = bogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
-        System.out.println("\nFiltered Bogies (Capacity > 60):");
-        for (Bogie b : filteredBogies) {
-            System.out.println(b);
-        }
+        // Note about duplicates
+        System.out.println("Note:");
+        System.out.println("Duplicates are automatically ignored by HashSet.\n");
 
-        System.out.println("\nUC8 filtering completed...");
+        System.out.println("UC3 uniqueness validation completed...");
     }
 }
