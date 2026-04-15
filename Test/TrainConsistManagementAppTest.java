@@ -1,48 +1,48 @@
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TrainConsistManagementAppTest extends TrainConsistManagementApp {
+class TrainConsistManagementAppTest {
 
-    // Helper data
-    private List<Bogie> getBogies() {
-        List<Bogie> list = new ArrayList<>();
-        list.add(new Bogie("Sleeper", 72));
-        list.add(new Bogie("Sleeper", 70));
-        list.add(new Bogie("AC Chair", 56));
-        list.add(new Bogie("First Class", 24));
+    private List<TrainConsistManagementApp.Bogie> getBogies() {
+        List<TrainConsistManagementApp.Bogie> list = new ArrayList<>();
+        list.add(new TrainConsistManagementApp.Bogie("Sleeper", 72));
+        list.add(new TrainConsistManagementApp.Bogie("AC Chair", 56));
+        list.add(new TrainConsistManagementApp.Bogie("First Class", 24));
+        list.add(new TrainConsistManagementApp.Bogie("Sleeper", 70));
         return list;
     }
 
-    // Test 1
     @Test
-    void testGrouping_BogiesGroupedByType() {
-
-        Map<String, List<Bogie>> result = groupBogiesByType(getBogies());
-
-        assertEquals(2, result.get("Sleeper").size()); // two sleeper bogies
+    void testTotalCapacity_NormalCase() {
+        int result = TrainConsistManagementApp.calculateTotalCapacity(getBogies());
+        assertEquals(222, result);  // 72 + 56 + 24 + 70
     }
 
-    // Test 2:
     @Test
-    void testGrouping_DifferentBogieTypes() {
-
-        Map<String, List<Bogie>> result = groupBogiesByType(getBogies());
-
-        assertTrue(result.containsKey("AC Chair"));
-        assertTrue(result.containsKey("First Class"));
+    void testTotalCapacity_EmptyList() {
+        List<TrainConsistManagementApp.Bogie> empty = new ArrayList<>();
+        int result = TrainConsistManagementApp.calculateTotalCapacity(empty);
+        assertEquals(0, result);
     }
 
-    // Test 3
     @Test
-    void testGrouping_EmptyBogieList() {
+    void testTotalCapacity_SingleBogie() {
+        List<TrainConsistManagementApp.Bogie> list = new ArrayList<>();
+        list.add(new TrainConsistManagementApp.Bogie("Sleeper", 72));
 
-        List<Bogie> empty = new ArrayList<>();
+        int result = TrainConsistManagementApp.calculateTotalCapacity(list);
+        assertEquals(72, result);
+    }
 
-        Map<String, List<Bogie>> result = groupBogiesByType(empty);
+    @Test
+    void testTotalCapacity_ZeroCapacity() {
+        List<TrainConsistManagementApp.Bogie> list = new ArrayList<>();
+        list.add(new TrainConsistManagementApp.Bogie("Sleeper", 0));
+        list.add(new TrainConsistManagementApp.Bogie("AC Chair", 0));
 
-        assertTrue(result.isEmpty());
+        int result = TrainConsistManagementApp.calculateTotalCapacity(list);
+        assertEquals(0, result);
     }
 }
