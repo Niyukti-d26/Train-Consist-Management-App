@@ -4,29 +4,38 @@ import static org.junit.jupiter.api.Assertions.*;
 class TrainConsistManagementAppTest extends TrainConsistManagementApp {
 
     @Test
-    void testBubbleSort_Basic() {
-        int[] arr = {72, 56, 24};
+    void testSort_Basic() {
+        String[] arr = {"Sleeper", "AC Chair", "General"};
 
-        bubbleSort(arr);
+        sortBogieNames(arr);
 
-        assertArrayEquals(new int[]{24, 56, 72}, arr);
+        assertArrayEquals(
+                new String[]{"AC Chair", "General", "Sleeper"},
+                arr
+        );
     }
 
     @Test
-    void testBubbleSort_AlreadySorted() {
-        int[] arr = {10, 20, 30};
+    void testSort_AlreadySorted() {
+        String[] arr = {"AC Chair", "First Class", "Sleeper"};
 
-        bubbleSort(arr);
+        sortBogieNames(arr);
 
-        assertArrayEquals(new int[]{10, 20, 30}, arr);
+        assertArrayEquals(
+                new String[]{"AC Chair", "First Class", "Sleeper"},
+                arr
+        );
     }
 
     @Test
-    void testBubbleSort_Duplicates() {
-        int[] arr = {50, 20, 50, 10};
+    void testSort_UnsortedInput() {
+        String[] arr = {"Luxury", "General", "AC Chair"};
 
-        bubbleSort(arr);
+        sortBogieNames(arr);
 
-        assertArrayEquals(new int[]{10, 20, 50, 50}, arr);
+        assertArrayEquals(
+                new String[]{"AC Chair", "General", "Luxury"},
+                arr
+        );
     }
 }
