@@ -1,39 +1,19 @@
 public class TrainConsistManagementApp {
 
-    static class CargoSafetyException extends RuntimeException {
-        public CargoSafetyException(String message) {
-            super(message);
-        }
-    }
+    public static void bubbleSort(int[] arr) {
 
-    static class GoodsBogie {
-        String shape;
-        String cargo;
+        int n = arr.length;
 
-        GoodsBogie(String shape) {
-            this.shape = shape;
-        }
+        for (int i = 0; i < n - 1; i++) {
 
-        void assignCargo(String cargo) {
+            for (int j = 0; j < n - i - 1; j++) {
 
-            try {
-                // Rule: Rectangular bogie cannot carry Petroleum
-                if (shape.equalsIgnoreCase("Rectangular") &&
-                        cargo.equalsIgnoreCase("Petroleum")) {
-
-                    throw new CargoSafetyException(
-                            "Unsafe cargo assignment: Petroleum not allowed in Rectangular bogie"
-                    );
+                if (arr[j] > arr[j + 1]) {
+                    // 🔹 Swap
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
-
-                this.cargo = cargo;
-                System.out.println("Cargo assigned: " + shape + " -> " + cargo);
-
-            } catch (CargoSafetyException e) {
-                System.out.println("Error: " + e.getMessage());
-
-            } finally {
-                System.out.println("Cargo assignment attempt completed.\n");
             }
         }
     }
@@ -41,15 +21,23 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("=======================================");
-        System.out.println(" UC15 - Safe Cargo Assignment ");
+        System.out.println(" UC16 - Manual Sorting using Bubble Sort ");
         System.out.println("=======================================\n");
 
-        GoodsBogie b1 = new GoodsBogie("Cylindrical");
-        b1.assignCargo("Petroleum"); // valid
+        int[] capacities = {72, 56, 24, 90, 70};
 
-        GoodsBogie b2 = new GoodsBogie("Rectangular");
-        b2.assignCargo("Petroleum"); // invalid
+        System.out.println("Original Capacities:");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
 
-        System.out.println("UC15 execution continues safely...");
+        bubbleSort(capacities);
+
+        System.out.println("\n\nSorted Capacities (Ascending):");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
+
+        System.out.println("\n\nUC16 sorting completed...");
     }
 }

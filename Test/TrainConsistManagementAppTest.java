@@ -4,25 +4,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class TrainConsistManagementAppTest extends TrainConsistManagementApp {
 
     @Test
-    void testSafeAssignment() {
-        GoodsBogie bogie = new GoodsBogie("Cylindrical");
-        bogie.assignCargo("Petroleum");
+    void testBubbleSort_Basic() {
+        int[] arr = {72, 56, 24};
 
-        assertEquals("Petroleum", bogie.cargo);
+        bubbleSort(arr);
+
+        assertArrayEquals(new int[]{24, 56, 72}, arr);
     }
 
     @Test
-    void testUnsafeAssignment() {
-        GoodsBogie bogie = new GoodsBogie("Rectangular");
-        bogie.assignCargo("Petroleum");
+    void testBubbleSort_AlreadySorted() {
+        int[] arr = {10, 20, 30};
 
-        assertNull(bogie.cargo); // assignment should fail
+        bubbleSort(arr);
+
+        assertArrayEquals(new int[]{10, 20, 30}, arr);
     }
 
     @Test
-    void testProgramContinuation() {
-        GoodsBogie bogie = new GoodsBogie("Rectangular");
+    void testBubbleSort_Duplicates() {
+        int[] arr = {50, 20, 50, 10};
 
-        assertDoesNotThrow(() -> bogie.assignCargo("Petroleum"));
+        bubbleSort(arr);
+
+        assertArrayEquals(new int[]{10, 20, 50, 50}, arr);
     }
 }
