@@ -1,23 +1,14 @@
-import java.util.Arrays;
-
 public class TrainConsistManagementApp {
-    public static boolean binarySearch(String[] arr, String key) {
 
-        int low = 0;
-        int high = arr.length - 1;
+    public static boolean searchBogie(String[] bogieIds, String searchId) {
 
-        while (low <= high) {
+        if (bogieIds == null || bogieIds.length == 0) {
+            throw new IllegalStateException("No bogies available in train. Cannot perform search.");
+        }
 
-            int mid = (low + high) / 2;
-
-            int comparison = key.compareTo(arr[mid]);
-
-            if (comparison == 0) {
+        for (String id : bogieIds) {
+            if (id.equals(searchId)) {
                 return true;
-            } else if (comparison < 0) {
-                high = mid - 1;
-            } else {
-                low = mid + 1;
             }
         }
 
@@ -27,28 +18,21 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("=======================================");
-        System.out.println(" UC19 - Binary Search for Bogie ID ");
+        System.out.println(" UC20 - Exception Handling During Search ");
         System.out.println("=======================================\n");
 
-        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        String[] bogieIds = {};
 
-        Arrays.sort(bogieIds);
+        String searchId = "BG101";
 
-        String key = "BG309";
-
-        System.out.println("Sorted Bogie IDs:");
-        for (String id : bogieIds) {
-            System.out.println(id);
-        }
-
-        boolean found = binarySearch(bogieIds, key);
-
-        System.out.println();
+        boolean found = searchBogie(bogieIds, searchId);
 
         if (found) {
-            System.out.println("Bogie " + key + " found using Binary Search.");
+            System.out.println("Bogie Found!");
         } else {
-            System.out.println("Bogie " + key + " not found.");
+            System.out.println("Bogie Not Found!");
         }
+
+        System.out.println("\nUC20 execution completed...");
     }
 }
